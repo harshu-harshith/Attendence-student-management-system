@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="student.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</head>
+
+<body>
+    <div id="navbar">
+        <img src="https://siiet.ac.in/wp-content/uploads/2023/05/main-new-logo.png" alt="nopic" id="navimg">
+        <img src="https://sriindu.ac.in/wp-content/uploads/2019/05/certificates-logos.png" alt="nopic" id="navimg">
+    </div>
+    <div id="dashboard">
+        <div id="sidebar">
+            <div id="button">
+                <button onclick="showContent('home')"><i class="fas fa-home"></i> Home</button>
+                <p id="enquiry">Enquiry</p>
+                <button onclick="showContent('attendance')"><i class="fas fa-calendar-check"></i> Attendance</button>
+                <button onclick="showContent('result')"><i class="fas fa-clipboard-list"></i> Result</button>
+
+                <p id="academics">Academics</p>
+                <button onclick="showContent('notes')"><i class="fas fa-book"></i> Digital Notes</button>
+                <button onclick="showContent('videos')"><i class="fas fa-video"></i> Lab Videos</button>
+                <button onclick="showContent('group')"><i class="fas fa-users"></i> Group</button>
+
+                <p id="extras">Extras</p>
+                <button onclick="showContent('voting')"><i class="fas fa-vote-yea"></i> Voting</button>
+                <button onclick="showContent('idcard')"><i class="fas fa-id-card"></i> Digital ID Card</button>
+                <button onclick="showContent('lostfound')"><i class="fas fa-search"></i> Lost & Found</button>
+            </div>
+        </div>
+
+        <div id="content">
+            <div id="home" class="content-section">
+                <h1 style="color:#4A90E2">Welcome <span id="userIdLabel2" style="color:#4A90E2"></span></h1><br>
+                <div id="dashboard-boxes">
+                    <div class="box">
+                        <i class="fas fa-calendar-check" style="color: black;"></i> Attendance: <span
+                            id="attendanceValue">Error Loading
+                            Data</span><br><br>
+                        <div class="attendance-container">
+                            <div class="attendance-chart" id="attendanceChart"></div>
+                            <div class="legend">
+                                <div class="legend-item"><span class="legend-color green"></span> Present: <span
+                                        id="presentCount">0</span></div>
+                                <div class="legend-item"><span class="legend-color orange"></span> Late: <span
+                                        id="lateCount">0</span></div>
+                                <div class="legend-item"><span class="legend-color red"></span> Absent: <span
+                                        id="absentCount">0</span></div>
+                                <div class="legend-item"><span class="legend-color blue"></span> Leave: <span
+                                        id="leaveCount">0</span></div>
+                                <div class="legend-item"><span class="legend-color purple"></span> Event: <span
+                                        id="eventCount">0</span></div>
+                                <div style="font-size: 20px;"><strong id="totalAttendance"></strong></div>
+                            </div>
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
+                            <script src="attendencechart.js"></script>
+                        </div>
+                    </div>
+
+                    <div class="box">
+                        <i class="fas fa-graduation-cap" style="color: black;"></i> CGPA: <span
+                            id="cgpaValue"></span><br><br>
+                        <div class="cgpa-container">
+                            <div class="cgpa-chart" id="cgpaChart"></div>
+                            <div class="cgpa-legend">
+                                <div class="cgpa-legend-item"><span class="cgpa-legend-color cgpa-green"></span> Scored:
+                                    <span id="scoredPercent">0%</span>
+                                </div>
+                                <div class="cgpa-legend-item"><span class="cgpa-legend-color cgpa-red"></span> Not
+                                    Scored: <span id="notScoredPercent">0%</span></div>
+                                <div><strong id="cgpaValue"></strong></div>
+                            </div>
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
+                            <script src="cgpachart.js"></script>
+                        </div>
+
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
+                        <script src="cgpa.js"></script>
+                    </div>
+
+                    <div class="box">
+                        <i class="fas fa-clipboard-list" style="color: black;"></i> Assignment<br>&emsp;Submitted: <span
+                            id="assignmentValue"></span><br>
+                        <p><i class="fas fa-project-diagram" style="color: black;"></i> Project<br>&ensp;&nbsp;&nbsp;
+                            Completed: <span id="projectValue"></span></p>
+
+                    </div>
+                </div>
+
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
+                <script src="dashboard.js"></script>
+                <br><br>
+                <div id="profileData">
+                    <div id="profileData"></div>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
+                    <script src="profile.js"></script>
+                </div>
+
+            </div>
+
+            <div id="attendance" class="content-section hidden">
+                <div id="user_choice">
+                    <div><br>HALL TICKET NO--<span id="userIdLabel23"></span><br></div>
+                    <form id="attendanceForm">
+                        <div class="radio-container">
+                            <p style="color: #4A90E2;">Select Year</p>
+                            <input type="radio" id="year1" name="year" value="1">
+                            <label for="year1" class="radio-label">Year 1</label>
+                            <br>
+                            <input type="radio" id="year2" name="year" value="2">
+                            <label for="year2" class="radio-label">Year 2</label>
+                            <br>
+                            <input type="radio" id="year3" name="year" value="3">
+                            <label for="year3" class="radio-label">Year 3</label>
+                            <br>
+                            <input type="radio" id="year4" name="year" value="4">
+                            <label for="year4" class="radio-label">Year 4</label>
+                        </div>
+                        <p style="color: #4A90E2;">Select Semister</p>
+                        <div class="radio-container">
+                            <input type="radio" id="sem1" name="semester" value="1">
+                            <label for="sem1" class="radio-label">Semester 1</label>
+                            <br>
+                            <input type="radio" id="sem2" name="semester" value="2">
+                            <label for="sem2" class="radio-label">Semester 2</label>
+                        </div>
+                        <br>
+                        <button type="button" onclick="fetchAttendanceAndScroll()" id="Submit">Submit</button>
+                    </form>
+                </div>
+                <br><br><br><br>
+                <div id="attendanceTable"></div>
+                <br><br><br><br>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
+                <script src="attendence.js"></script>
+
+            </div>
+
+            <div id="result" class="content-section hidden">
+                <div id="user_choice">
+                    <div><br>HALL TICKET NO--<span id="userIdLabel1"></span><br></div>
+                    <form id="resultsForm">
+                        <div class="radio-container">
+                            <p style="color: #4A90E2;">Select Year</p>
+                            <input type="radio" id="year1" name="year" value="1">
+                            <label for="year1" class="radio-label">Year 1</label>
+                            <br>
+                            <input type="radio" id="year2" name="year" value="2">
+                            <label for="year2" class="radio-label">Year 2</label>
+                            <br>
+                            <input type="radio" id="year3" name="year" value="3">
+                            <label for="year3" class="radio-label">Year 3</label>
+                            <br>
+                            <input type="radio" id="year4" name="year" value="4">
+                            <label for="year4" class="radio-label">Year 4</label>
+                        </div>
+                        <p style="color: #4A90E2;">Select Semister</p>
+                        <div class="radio-container">
+                            <input type="radio" id="sem1" name="semester" value="1">
+                            <label for="sem1" class="radio-label">Semester 1</label>
+                            <br>
+                            <input type="radio" id="sem2" name="semester" value="2">
+                            <label for="sem2" class="radio-label">Semester 2</label>
+                        </div>
+
+                        <br>
+
+                        <button type="button" onclick="fetchResultsAndScroll()" id="Submit">Submit</button>
+                    </form>
+                </div>
+                <br><br><br><br><br>
+                <div id="resultsTable"></div>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
+                <script src="results.js"></script>
+                <br><br><br><br>
+            </div>
+
+            <div id="notes" class="content-section hidden">
+                <h2>Digital Notes</h2>
+                <p>Access digital notes and study materials.</p>
+                <form id="notesForm">
+                    <label for="year">Select Year:</label>
+                    <select id="year" name="year" required>
+                        <option value="">--Select Year--</option>
+                        <option value="1">1st Year</option>
+                        <option value="2">2nd Year</option>
+                        <option value="3">3rd Year</option>
+                        <option value="4">4th Year</option>
+                    </select>
+                    <label for="semester">Select Semester:</label>
+                    <select id="semester" name="semester" required>
+                        <option value="">--Select Semester--</option>
+                        <option value="1">1st Semester</option>
+                        <option value="2">2nd Semester</option>
+                    </select>
+                    <button type="button" onclick="fetchNotes()">Get Notes</button>
+                </form>
+                <div id="notesList" class="notes-list"></div>
+                <script src="notes.js"></script>
+            </div>
+
+            <div id="videos" class="content-section hidden">
+                <h2>Lab Videos</h2>
+                <p>Watch lab tutorial videos.</p>
+            </div>
+
+            <div id="lostfound" class="content-section hidden">
+                <h2>Lost & Found</h2>
+                <p>Find lost and found items here.</p>
+            </div>
+
+            <div id="group" class="content-section hidden">
+                <h2>Group</h2>
+                <p>Join and manage your student groups.</p>
+            </div>
+
+            <div id="voting" class="content-section hidden">
+                <h2>Voting</h2>
+                <p>Participate in student elections and voting.</p>
+            </div>
+
+            <div id="idcard" class="content-section hidden">
+                <h2>Digital ID Card</h2>
+                <p>View and download your digital ID card.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showContent(section) {
+            let sections = document.querySelectorAll('.content-section');
+
+            sections.forEach(sec => {
+                sec.classList.add('hidden');
+            });
+
+            document.getElementById(section).classList.remove('hidden');
+        }
+        function fillIdLabel() {
+            const loggedInUsername = sessionStorage.getItem('loggedInUsername');
+            const idLabel = document.getElementById('userIdLabel2');
+            idLabel.textContent = loggedInUsername;
+        }
+    </script>
+</body>
+
+</html>
